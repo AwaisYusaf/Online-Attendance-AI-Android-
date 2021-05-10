@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "285555371124",
+    "project_id": "cuonlineattendancesystem",
+    "storage_bucket": "cuonlineattendancesystem.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:285555371124:android:1d42dfdb4d388f67d6b521",
+        "android_client_info": {
+          "package_name": "com.example.cuonlineattendancesystem"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "285555371124-6l9ldkhic4pat456upice7i3vcs3693r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBkJOz3aCwVzaBGBATusRTxvZryhZMQFzk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "285555371124-6l9ldkhic4pat456upice7i3vcs3693r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
