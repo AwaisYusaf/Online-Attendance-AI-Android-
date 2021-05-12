@@ -10,12 +10,10 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,33 +23,34 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.protobuf.DescriptorProtos;
 
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.ls.LSParserFilter;
-
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.HashMap;
 import java.util.Map;
 
-public class Home extends AppCompatActivity {
-    TextView email_tv;
-    Button logout;
-    FirebaseAuth mAuth;
+public class student_home extends AppCompatActivity {
+
+    TextView USERNAME;
+    TextView EMAIL;
+    TextView REG_NO;
+    Button LOGOUT;
+
+
+    FirebaseAuth M_AUTH_FIREBASE;
+    FirebaseFirestore DATABASE;
+
+
     FirebaseStorage storage;
+
     ImageView front_image;
     ImageView back_image;
     Uri imageURI;
@@ -68,52 +67,25 @@ public class Home extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
-        email_tv = (TextView ) findViewById(R.id.email_tv);
-        logout = (Button) findViewById(R.id.button_logout);
-        fName = (EditText) findViewById(R.id.firstName_student);
-        lName = (EditText) findViewById(R.id.lastName_student);
-        regNo = (EditText) findViewById(R.id.regNo_student);
-        save_btn = (Button) findViewById(R.id.save_student_info);
-        mAuth = FirebaseAuth.getInstance();
-        Intent intent= getIntent();
-        email_tv.setText(mAuth.getCurrentUser().getEmail());
-//        intent.getStringExtra("email")
-        db = FirebaseFirestore.getInstance();
-        FirebaseUser fUser = FirebaseAuth.getInstance().getCurrentUser();
-        save_btn.setOnClickListener(new View.OnClickListener() {
+        setContentView(R.layout.activity_student_home);
+
+        USERNAME = (TextView) findViewById(R.id.user_name_tv_home);
+        EMAIL = (TextView ) findViewById(R.id.email_tv_home);
+        REG_NO = (TextView) findViewById(R.id.officialId);
+
+        M_AUTH_FIREBASE = FirebaseAuth.getInstance();
+        DATABASE = FirebaseFirestore.getInstance();
+        loadData();
+
+        LOGOUT = (Button) findViewById(R.id.button_logout_home);
+        LOGOUT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String firstName = fName.getText().toString().trim();
-                String lastName = lName.getText().toString().trim();
-                String regisNo = regNo.getText().toString().trim();
-
-                Map<String,Object> user= new HashMap<>();
-                user.put("firstName",firstName);
-                user.put("lastName",lastName);
-                user.put("regNo",regisNo);
-
-
-                DocumentReference documentReference = db.collection("users").document((String) mAuth.getCurrentUser().getUid());
-                Toast.makeText(getApplicationContext(),"Successfully created document",Toast.LENGTH_LONG).show();
-
-
-
-                documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Toast.makeText(getApplicationContext(),"Success",Toast.LENGTH_LONG).show();
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(getApplicationContext(),"Failed",Toast.LENGTH_LONG).show();
-                    }
-                });
-
-
+                LogOut();
             }
         });
+
+
 
 //        front_image = (ImageView) findViewById(R.id.frontImage);
 //        front_image.setOnClickListener(new View.OnClickListener() {
@@ -160,7 +132,49 @@ public class Home extends AppCompatActivity {
 //                startActivity(intent1);
 //            }
 //        });
+
+
     }
+
+
+    private void loadData(){
+        if (M_AUTH_FIREBASE!=null){
+            DocumentReference dRef  = DATABASE.collection("student").document(M_AUTH_FIREBASE.getCurrentUser().getUid());
+            dRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()){
+                        DocumentSnapshot documentSnapshot = task.getResult();
+                        if (documentSnapshot.exists()){
+                            Map<String,Object> data= documentSnapshot.getData();
+                            USERNAME.setText("WELCOME, "+data.get("name").toString());
+                            EMAIL.setText("Your Email: "+M_AUTH_FIREBASE.getCurrentUser().getEmail());
+                            REG_NO.setText("Registration No:"+data.get("regNo").toString());
+                        }
+                    }
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(getApplicationContext(),"Error",Toast.LENGTH_LONG).show();
+                }
+            });
+        }
+        else {
+            Toast.makeText(getApplicationContext(),"Session Expired...",Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(this,MainActivity.class);
+            M_AUTH_FIREBASE.signOut();
+            startActivity(intent);
+        }
+    }
+
+    private void LogOut(){
+        M_AUTH_FIREBASE.signOut();
+        Intent intent = new Intent(this,MainActivity.class);
+        startActivity(intent);
+    }
+
+
     private void frontImageClicked(){
 //        Intent intent = new Intent();
 //        intent.setType("image/*");
@@ -178,7 +192,7 @@ public class Home extends AppCompatActivity {
 //        intent.setAction(Intent.ACTION_GET_CONTENT);
 //        startActivityForResult(Intent.createChooser(intent, "Select Picture"), 1);
         final CharSequence[] options = { "Take Photo", "Choose from Gallery","Cancel" };
-        AlertDialog.Builder builder = new AlertDialog.Builder(Home.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(student_home.this);
         builder.setTitle("Add Photo!");
         builder.setItems(options, new DialogInterface.OnClickListener() {
             @Override

@@ -4,16 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    tools:context=".AddSubject"
     android:background="@drawable/login">
 
     <EditText
-        android:id="@+id/loginPassword"
+        android:id="@+id/add_subject_code"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Password"
-        android:inputType="textPassword"
+        android:hint="Subject Code"
+        android:inputType="text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -41,7 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/abeezee"
-        android:text="Log In"
+        android:text="Add Subject Menu"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -50,12 +50,12 @@
         app:layout_constraintVertical_bias="0.21" />
 
     <EditText
-        android:id="@+id/LoginRegNo"
+        android:id="@+id/add_subject_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Email"
-        android:inputType="textEmailAddress"
+        android:hint="Subject Name"
+        android:inputType="text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -64,24 +64,24 @@
         app:layout_constraintVertical_bias="0.349" />
 
     <Button
-        android:id="@+id/button_login"
+        android:id="@+id/add_subject_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#1b456b"
-        android:text="LOGIN"
+        android:text="ADD"
         android:textColor="#FFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.677" />
+        app:layout_constraintVertical_bias="0.597" />
 
     <TextView
-        android:id="@+id/sign_up_link"
+        android:id="@+id/backToTeacherConsole"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Don't have an account? Sign up"
+        android:text="Don't want to add subject? Click here"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -90,7 +90,7 @@
         app:layout_constraintVertical_bias="0.745" />
 
     <ProgressBar
-        android:id="@+id/progressBar"
+        android:id="@+id/addSubjectProgressBar"
         style="?android:attr/progressBarStyle"
         android:layout_width="54dp"
         android:layout_height="55dp"
@@ -101,33 +101,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.355" />
 
-    <RadioGroup
-        android:id="@+id/radio_btn_group"
-        android:layout_width="170dp"
-        android:layout_height="117dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.604">
-
-        <RadioButton
-            android:id="@+id/teacher-Radio_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="I am a teacher"
-            tools:ignore="MissingConstraints"
-            android:tag="teacher"/>
-
-        <RadioButton
-            android:id="@+id/student-Radio_btn"
-            android:layout_width="148dp"
-            android:layout_height="60dp"
-            android:tag="student"
-            android:text="I am a student" />
-
-    </RadioGroup>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

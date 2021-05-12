@@ -4,24 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Welcome_Screen"
+    tools:context=".student_home"
     android:background="@drawable/login">
 
-    <Button
-        android:id="@+id/i_am_a_student"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/officialId_tv_home"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="50px"
-        android:layout_marginRight="50px"
-        android:background="#1b456b"
-        android:text="I AM A STUDENT"
-        android:textColor="#FFF"
+        android:text="Your Official ID: 072"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.131"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.48" />
+        app:layout_constraintVertical_bias="0.436" />
+
+    <TextView
+        android:id="@+id/email_tv_home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your Email: awaixkhan3@gmail.com"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.205"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.369" />
 
     <TextView
         android:id="@+id/textView_title2"
@@ -43,7 +51,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/abeezee"
-        android:text="HOME"
+        android:text="Student's Home"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -53,19 +61,29 @@
 
 
     <Button
-        android:id="@+id/i_am_a_teacher"
-        android:layout_width="match_parent"
+        android:id="@+id/button_logout_home"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="50px"
-        android:layout_marginRight="50px"
         android:background="#1b456b"
-        android:text="I am a teacher"
+        android:text="LOGOUT"
         android:textColor="#FFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.373" />
+        app:layout_constraintVertical_bias="0.896" />
+
+    <TextView
+        android:id="@+id/user_name_tv_home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Welcome, Muhammad Awais"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.069"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.286" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
