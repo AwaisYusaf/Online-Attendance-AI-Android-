@@ -75,12 +75,6 @@ public class teacher_home extends AppCompatActivity {
 
     }
 
-    private  void LogOut(){
-        mAUTH.signOut();
-        Intent intent = new Intent(this,MainActivity.class);
-        startActivity(intent);
-    }
-
     private void loadData(){
         if (mAUTH!=null){
             DocumentReference dRef  = DATABASE.collection("teacher").document(mAUTH.getCurrentUser().getUid());
@@ -104,14 +98,23 @@ public class teacher_home extends AppCompatActivity {
                 }
             });
         }
+        else {
+            Toast.makeText(getApplicationContext(),"Error: Unable to load teacher profile",Toast.LENGTH_LONG).show();
+        }
     }
 
     private void addSubject(){
         Intent intent = new Intent(this,AddSubject.class);
         startActivity(intent);
     }
+    private  void LogOut(){
+        mAUTH.signOut();
+        Intent intent = new Intent(this,MainActivity.class);
+        startActivity(intent);
+    }
 
     private void generateQRCode(){
-
+        Intent intent = new Intent(this,GenerateQR.class);
+        startActivity(intent);
     }
 }

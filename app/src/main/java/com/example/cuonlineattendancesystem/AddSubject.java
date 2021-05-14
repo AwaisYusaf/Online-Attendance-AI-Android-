@@ -96,6 +96,8 @@ public class AddSubject extends AppCompatActivity {
                     subject.put("subjectName",mSubjectName);
                     subject.put("userId",mAUTH_FIREBASE.getCurrentUser().getUid());
                     subject.put("empId",teacherId);
+
+                    //Creating new collection , Adding a document with name = subject id in Subject collection.
                     DocumentReference dRef = DATABASE.collection("subject").document(mSubjectCode);
                     dRef.set(subject).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
